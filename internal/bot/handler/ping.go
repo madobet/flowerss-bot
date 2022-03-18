@@ -22,7 +22,7 @@ func (p *Ping) Description() string {
 }
 
 func (p *Ping) Handle(ctx tb.Context) error {
-	return ctx.Send("pong")
+	return ctx.Send("啊…需要午觉。如果没有什么特别的事情…我就先行告退了。")
 }
 
 func (p *Ping) Middlewares() []tb.MiddlewareFunc {

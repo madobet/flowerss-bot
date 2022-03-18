@@ -16,12 +16,12 @@ func (h *Help) Command() string {
 }
 
 func (h *Help) Description() string {
-	return "帮助"
+	return "谨遵你我契约"
 }
 
 func (h *Help) Handle(ctx tb.Context) error {
 	message := `
-	命令：
+	请向我下达指令：
 	/sub 订阅源
 	/unsub  取消订阅
 	/list 查看当前订阅源
@@ -35,7 +35,6 @@ func (h *Help) Handle(ctx tb.Context) error {
 	/import 导入 OPML 文件
 	/export 导出 OPML 文件
 	/unsuball 取消所有订阅
-	详细使用方法请看：https://github.com/indes/flowerss-bot
 	`
 	return ctx.Send(message)
 }

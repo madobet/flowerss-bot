@@ -20,7 +20,7 @@ func (a *ActiveAll) Command() string {
 }
 
 func (a *ActiveAll) Description() string {
-	return "开启抓取订阅更新"
+	return "将你的要求写下来，放在这边就好。"
 }
 
 func (a *ActiveAll) Handle(ctx tb.Context) error {

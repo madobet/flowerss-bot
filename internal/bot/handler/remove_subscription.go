@@ -26,7 +26,7 @@ func (s *RemoveSubscription) Command() string {
 }
 
 func (s *RemoveSubscription) Description() string {
-	return "退订RSS源"
+	return "这项工作，该划掉了"
 }
 
 func (s *RemoveSubscription) removeForChannel(ctx tb.Context, channelName string) error {
@@ -56,7 +56,7 @@ func (s *RemoveSubscription) removeForChannel(ctx tb.Context, channelName string
 				},
 			)
 		}
-		return ctx.Reply("退订失败")
+		return ctx.Reply("欸？好像弄砸了？ ")
 	}
 	zap.S().Infof("%d for [%d]%s unsubscribe %s", ctx.Chat().ID, source.ID, source.Title, source.Link)
 	if err := sub.Unsub(); err != nil {
@@ -64,7 +64,7 @@ func (s *RemoveSubscription) removeForChannel(ctx tb.Context, channelName string
 			"%d for [%d]%s unsubscribe %s failed, %v",
 			ctx.Chat().ID, source.ID, source.Title, source.Link, err,
 		)
-		return ctx.Reply("退订失败")
+		return ctx.Reply("欸？好像弄砸了？ ")
 	}
 	return ctx.Send(
 		fmt.Sprintf(
@@ -121,10 +121,10 @@ func (s *RemoveSubscription) removeForChat(ctx tb.Context) error {
 			"%d for [%d]%s unsubscribe %s failed, %v",
 			ctx.Chat().ID, source.ID, source.Title, source.Link, err,
 		)
-		return ctx.Reply("退订失败")
+		return ctx.Reply("欸？好像弄砸了？ ")
 	}
 	return ctx.Send(
-		fmt.Sprintf("[%s](%s) 退订成功！", source.Title, source.Link),
+		fmt.Sprintf("[%s](%s) 下一项工作是… ", source.Title, source.Link),
 		&tb.SendOptions{DisableWebPagePreview: true, ParseMode: tb.ModeMarkdown},
 	)
 }
@@ -162,12 +162,12 @@ func (r *RemoveSubscriptionItemButton) Description() string {
 
 func (r *RemoveSubscriptionItemButton) Handle(ctx tb.Context) error {
 	if ctx.Callback() == nil {
-		return ctx.Edit("内部错误！")
+		return ctx.Edit("内部错误")
 	}
 
 	data := strings.Split(ctx.Callback().Data, ":")
 	if len(data) != 3 {
-		return ctx.Edit("退订错误！")
+		return ctx.Edit("退订错误")
 	}
 
 	userID, _ := strconv.Atoi(data[0])
@@ -175,14 +175,14 @@ func (r *RemoveSubscriptionItemButton) Handle(ctx tb.Context) error {
 	sourceID, _ := strconv.Atoi(data[2])
 	source, err := model.GetSourceById(uint(sourceID))
 	if err != nil {
-		return ctx.Edit("退订错误！")
+		return ctx.Edit("退订错误")
 	}
 
 	if err := model.UnsubByUserIDAndSubID(int64(userID), uint(subID)); err != nil {
-		return ctx.Edit("退订错误！")
+		return ctx.Edit("退订错误")
 	}
 
-	rtnMsg := fmt.Sprintf("[%d] <a href=\"%s\">%s</a> 退订成功", sourceID, source.Link, source.Title)
+	rtnMsg := fmt.Sprintf("[%d] <a href=\"%s\">%s</a> 下一项工作是… ", sourceID, source.Link, source.Title)
 	return ctx.Edit(rtnMsg, &tb.SendOptions{ParseMode: tb.ModeHTML})
 }
 

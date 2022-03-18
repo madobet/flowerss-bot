@@ -52,7 +52,7 @@ func (b *SetSubscriptionTagButton) Handle(ctx tb.Context) error {
 	c := ctx.Callback()
 	// 权限验证
 	if !b.feedSetAuth(c) {
-		return ctx.Send("无权限")
+		return ctx.Send("闲人勿扰")
 	}
 	data := strings.Split(c.Data, ":")
 	ownID, _ := strconv.Atoi(data[0])

@@ -22,7 +22,7 @@ func NewExport() *Export {
 }
 
 func (e *Export) Description() string {
-	return "导出opml"
+	return "风雪的缩影"
 }
 
 func (e *Export) Command() string {

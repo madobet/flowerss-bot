@@ -22,14 +22,14 @@ func (l *ListSubscription) Command() string {
 }
 
 func (l *ListSubscription) Description() string {
-	return "已订阅的RSS源"
+	return "有所收获，就是一件好事"
 }
 
 func (l *ListSubscription) listChatSubscription(ctx tb.Context) error {
 	// private chat or group
 	if ctx.Chat().Type != tb.ChatPrivate && !chat.IsChatAdmin(ctx.Bot(), ctx.Chat(), ctx.Sender().ID) {
 		// 无权限
-		return ctx.Send("无权限")
+		return ctx.Send("闲人勿扰")
 	}
 
 	user, err := model.FindOrCreateUserByTelegramID(ctx.Chat().ID)

@@ -18,7 +18,7 @@ func (c *Version) Command() string {
 }
 
 func (c *Version) Description() string {
-	return "Bot 版本信息"
+	return "想要了解甘雨"
 }
 
 func (c *Version) Handle(ctx tb.Context) error {

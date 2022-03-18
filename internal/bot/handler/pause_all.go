@@ -21,7 +21,7 @@ func (p *PauseAll) Command() string {
 }
 
 func (p *PauseAll) Description() string {
-	return "停止抓取所有订阅更新"
+	return "这就是新的生活之道吧"
 }
 
 func (p *PauseAll) Handle(ctx tb.Context) error {

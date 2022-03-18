@@ -68,9 +68,9 @@ func (r *RemoveAllSubscriptionButton) Description() string {
 func (r *RemoveAllSubscriptionButton) Handle(ctx tb.Context) error {
 	success, fail, err := model.UnsubAllByUserID(ctx.Sender().ID)
 	if err != nil {
-		return ctx.Edit("退订失败")
+		return ctx.Edit("欸？好像弄砸了？ ")
 	}
-	return ctx.Edit(fmt.Sprintf("退订成功：%d\n退订失败：%d", success, fail))
+	return ctx.Edit(fmt.Sprintf("下一项工作是… ：%d\n欸？好像弄砸了？ ：%d", success, fail))
 }
 
 func (r *RemoveAllSubscriptionButton) Middlewares() []tb.MiddlewareFunc {
